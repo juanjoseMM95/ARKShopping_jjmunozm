@@ -3,6 +3,7 @@ package com.jjmunozm.course.springboot.webapp.springboot_web.service;
 import java.util.List;
 import java.util.Optional;
 
+// import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jjmunozm.course.springboot.webapp.springboot_web.model.User;
@@ -23,11 +24,18 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getUsersFilterByName(String name){
+        return userRepository.findByName(name);
+    }
+
+    public List<User> getUsersOrderByName(){
+        return userRepository.findUsersOrderByName();
+    }
+
     public User newUser(User user){
         return userRepository.save(user);
     }
 
-    //se añade comentario prueba github
     public User getUser(int id){
         return userRepository.findById(id).orElse(null);
     }

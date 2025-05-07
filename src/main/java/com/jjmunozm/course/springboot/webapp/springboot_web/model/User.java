@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -20,6 +21,9 @@ import lombok.NoArgsConstructor;
 @Data // Getters, Setters, ToString()
 @NoArgsConstructor // constructor vacio
 @AllArgsConstructor // Inicializa todos los atributos
+
+@NamedQuery(name = "User.findUsersOrderByName",
+  query = "select u from User u order by u.name")
 
 public class User {
   @Id // PK
