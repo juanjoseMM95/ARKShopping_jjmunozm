@@ -14,4 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findProductsbyShortName(@Param("descp") String filter);
     List<Product> findProductsRangePrice(@Param("min") double min, @Param("max") double max);
     List<Product> findProductsOrderByName();
+    List<Product> findProductsByCategory(@Param("id_category") int id);
 }

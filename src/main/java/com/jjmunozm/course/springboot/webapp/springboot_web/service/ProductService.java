@@ -59,4 +59,8 @@ public class ProductService {
         return productRepository.findProductsRangePrice(min, max);
     }
 
+    public List<Product> getProductsByCategory(int id_category){
+        return productRepository.findProductsByCategory(id_category);
+    }
+
 }

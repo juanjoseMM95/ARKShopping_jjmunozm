@@ -91,5 +91,12 @@ public class ProductController {
         List<Product> products = productService.getProductsRangePrice(min, max);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    
+
+    //Búsqueda de productos por categoría
+    @GetMapping("category/{id}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable int id) {
+        List<Product> products = productService.getProductsByCategory(id);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+       
 }

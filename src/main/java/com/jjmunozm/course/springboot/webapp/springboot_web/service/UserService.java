@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.jjmunozm.course.springboot.webapp.springboot_web.model.User;
 import com.jjmunozm.course.springboot.webapp.springboot_web.repository.UserRepository;
-
 //import lombok.RequiredArgsConstructor;
 
 @Service //se utiliza para llamar al UserRepository donde estan las consultas a la bd

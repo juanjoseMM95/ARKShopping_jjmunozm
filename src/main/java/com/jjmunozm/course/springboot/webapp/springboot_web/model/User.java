@@ -1,12 +1,17 @@
 package com.jjmunozm.course.springboot.webapp.springboot_web.model;
 
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -52,6 +57,10 @@ public class User {
   protected void onUpdate() {
     this.updated_at = new Date();
   }
+
+  //relacion con entidad Order
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
   // @Column(columnDefinition="TEXT") para indicar que ese atributo va a almacenar
   // un texto grande
