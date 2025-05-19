@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +36,10 @@ import lombok.NoArgsConstructor;
 query = "select o from Order o JOIN o.products p WHERE p.id = :id_product"
 )
 
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id"
+)
 public class Order {
     @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AI
@@ -58,12 +66,13 @@ public class Order {
 
     //relacion n:m con entidad Product
     //@JsonManagedReference(value = "product_order")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(
         name="orders_has_products",
         joinColumns = @JoinColumn(name ="order_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+
     private List<Product> products;
 
 }

@@ -3,10 +3,13 @@ package com.jjmunozm.course.springboot.webapp.springboot_web.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,6 +43,10 @@ query = "select p from Product p where p.value between :min and :max"
 query = "select p from Product p where p.category.id = :id_category"
 )
 
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id"
+)
 public class Product {
     @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AI
@@ -66,13 +73,13 @@ public class Product {
 
     //relacion con n:m con Order
     //@JsonBackReference(value = "product_order")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
       name = "orders_has_products",
       joinColumns = @JoinColumn(name = "product_id"),
       inverseJoinColumns = @JoinColumn(name = "order_id")
     )
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     private List<Order> orders;
 
 }

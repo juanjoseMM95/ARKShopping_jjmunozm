@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +32,7 @@ import lombok.NoArgsConstructor;
 @NamedQuery(name = "User.findUsersOrderByName",
   query = "select u from User u order by u.name")
 
+@JsonIgnoreProperties("orders")
 public class User {
   @Id // PK
   @GeneratedValue(strategy = GenerationType.IDENTITY) // AI
