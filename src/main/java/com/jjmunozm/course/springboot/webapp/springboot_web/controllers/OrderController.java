@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jjmunozm.course.springboot.webapp.springboot_web.dto.OrderDTO;
 import com.jjmunozm.course.springboot.webapp.springboot_web.model.Order;
 import com.jjmunozm.course.springboot.webapp.springboot_web.service.OrderService;
 
@@ -54,10 +55,10 @@ public class OrderController {
         return orderService.deleteOrder(id) ? ResponseEntity.ok().build() : ResponseEntity.noContent().build();
     }
 
-    //Búsqueda de Pedidos por producto
+    //Búsqueda de Orders por producto
     @GetMapping("/idProduct/{id}")
-    public ResponseEntity<List<Order>> getMethodName(@PathVariable int id) {
-        List<Order> orders = orderService.getOrdersByProduct(id);
+    public ResponseEntity<List<OrderDTO>> getMethodName(@PathVariable int id) {
+        List<OrderDTO> orders = orderService.getOrdersByProduct(id);
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
     

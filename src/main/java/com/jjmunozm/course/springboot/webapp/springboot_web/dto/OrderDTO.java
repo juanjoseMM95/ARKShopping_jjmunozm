@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.jjmunozm.course.springboot.webapp.springboot_web.model.Product;
-
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +23,8 @@ public class OrderDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd") // formato en el cuál queremos almacenar las fechas
     private Date date;
 
-    private User user;
+    private String userName;
 
-    private List<Product> products;
+    private List<Integer> productsId;
 
 }
