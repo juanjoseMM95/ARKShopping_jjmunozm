@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import com.jjmunozm.course.springboot.webapp.springboot_web.model.Car;
 import com.jjmunozm.course.springboot.webapp.springboot_web.repository.CarRepository;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@Service
+
+@Data
 @RequiredArgsConstructor
+@Service
 public class CarService {
     private final CarRepository carRepository;
 

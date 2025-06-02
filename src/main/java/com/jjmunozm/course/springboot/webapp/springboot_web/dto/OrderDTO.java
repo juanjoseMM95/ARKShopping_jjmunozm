@@ -27,4 +27,6 @@ public class OrderDTO {
 
     private List<Integer> productsId;
 
+    private Date expirationDate;
+
 }

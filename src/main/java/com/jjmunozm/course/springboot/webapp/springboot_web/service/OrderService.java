@@ -1,6 +1,8 @@
 package com.jjmunozm.course.springboot.webapp.springboot_web.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ public class OrderService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final OrderMapper orderMapper;
+    private final ProductService productService;
 
     public List<Order> allOrders(){
         return orderRepository.findAll();
@@ -47,6 +50,27 @@ public class OrderService {
         }else{
             return null;
         }
+    }
+
+    public OrderDTO newOrderExpirable(OrderDTO orderDTO) {
+        Order newOrder;
+        if(Objects.nonNull(orderDTO.getExpirationDate())){
+            newOrder = orderMapper.expirableOrderToOrder(orderDTO);
+        }else{
+            newOrder = orderMapper.orderDTOToOrder(orderDTO);
+        }
+        //con los ids de los productos recuperarlos de la base de datos.
+        List<Integer> productsId = orderDTO.getProductsId();
+        List<Product> products = new ArrayList<>();
+        for(Integer productId : productsId){
+            Product product = productRepository.findById(productId).orElse(null);
+            if(product != null){
+                products.add(product);
+            }
+        }
+        newOrder.setProducts(products);
+        orderRepository.save(newOrder);
+        return orderMapper.orderToOrderDTO(newOrder);
     }
 
     public Order getOrder(int id) {

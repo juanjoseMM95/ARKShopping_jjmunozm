@@ -16,11 +16,11 @@ import com.jjmunozm.course.springboot.webapp.springboot_web.model.Car;
 import com.jjmunozm.course.springboot.webapp.springboot_web.service.CarService;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/cars")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CarController {
 
     private final CarService carService;

@@ -44,6 +44,12 @@ public class OrderController {
         return new ResponseEntity<>(orderService.newOrder(order), HttpStatus.CREATED);
     }
 
+    @PostMapping("/dto")
+    public ResponseEntity<OrderDTO> addOrderDTO(@RequestBody OrderDTO orderDTO){
+        return new ResponseEntity<>(orderService.newOrderExpirable(orderDTO), HttpStatus.CREATED);
+    }
+
+
     @PutMapping("{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable int id, @RequestBody Order order) {
         Order updated = orderService.updateOrder(id, order);
