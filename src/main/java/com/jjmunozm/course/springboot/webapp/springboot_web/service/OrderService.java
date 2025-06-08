@@ -52,12 +52,20 @@ public class OrderService {
         }
     }
 
-    public OrderDTO newOrderExpirable(OrderDTO orderDTO) {
+    public Order newOrderExpirable(OrderDTO orderDTO) {
         Order newOrder;
+        int userId = orderDTO.getUserId();
+        User user = userRepository.findById(userId).orElse(null);
+        if(user == null){
+            user = new User();
+        }
+
         if(Objects.nonNull(orderDTO.getExpirationDate())){
             newOrder = orderMapper.expirableOrderToOrder(orderDTO);
+            newOrder.setUser(user);
         }else{
             newOrder = orderMapper.orderDTOToOrder(orderDTO);
+            newOrder.setUser(user);
         }
         //con los ids de los productos recuperarlos de la base de datos.
         List<Integer> productsId = orderDTO.getProductsId();
@@ -70,7 +78,8 @@ public class OrderService {
         }
         newOrder.setProducts(products);
         orderRepository.save(newOrder);
-        return orderMapper.orderToOrderDTO(newOrder);
+        //return orderMapper.orderToOrderDTO(newOrder);
+        return newOrder;
     }
 
     public Order getOrder(int id) {
@@ -97,7 +106,6 @@ public class OrderService {
 
     public List<OrderDTO> getOrdersByProduct(int id_product){
         List<Order> orders = orderRepository.findOrdersByIdProduct(id_product);
-
         return orderMapper.ordersToOrdersDTO(orders);
     }
 

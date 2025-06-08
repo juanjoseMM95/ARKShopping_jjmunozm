@@ -25,6 +25,8 @@ public class OrderDTO {
 
     private String userName;
 
+    private Integer userId;
+
     private List<Integer> productsId;
 
     private Date expirationDate;

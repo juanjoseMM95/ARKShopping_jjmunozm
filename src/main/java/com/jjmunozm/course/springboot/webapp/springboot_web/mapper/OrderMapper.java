@@ -17,8 +17,6 @@ import com.jjmunozm.course.springboot.webapp.springboot_web.model.Product;
     @Mapper(componentModel="spring")
     public interface OrderMapper {
 
-
-
         @Mapping(target="userName",source="user.name")
         @Mapping(target="productsId",source="products",qualifiedByName = "mapProductsToIds")
         @Mapping(target = "expirationDate", ignore = true)
@@ -36,6 +34,7 @@ import com.jjmunozm.course.springboot.webapp.springboot_web.model.Product;
                            .collect(Collectors.toList());
         }
 
+        @Mapping(target = "expirable", source = "expirationDate")
         OrderExpirable expirableOrderToOrder(OrderDTO orderDTO);
 
         Order orderDTOToOrder(OrderDTO orderDTO);

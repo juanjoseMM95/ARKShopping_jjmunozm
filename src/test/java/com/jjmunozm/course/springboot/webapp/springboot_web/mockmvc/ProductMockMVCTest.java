@@ -34,10 +34,10 @@ public class ProductMockMVCTest {
 
     @Test
     void testPostMethod() throws Exception {
-        Product productTest = new Product((int) 1L, "Descripción del producto", 1200, 15, true, null, null);
+        Product productTest = new Product((int) 1L, "Descripción del producto", 1200, 15, true, null, null, null);
         when(productService.AddProduct(any())).thenReturn(productTest);
         String request = new ObjectMapper()
-                .writeValueAsString(new Product((int) 1L, "Descripción del producto3", 1300, 15, true, null, null));
+                .writeValueAsString(new Product((int) 1L, "Descripción del producto3", 1300, 15, true, null,null, null));
         MvcResult mvcResult = this.mockMvc
                 .perform(post("/api/products")
                         .contentType(APPLICATION_JSON)

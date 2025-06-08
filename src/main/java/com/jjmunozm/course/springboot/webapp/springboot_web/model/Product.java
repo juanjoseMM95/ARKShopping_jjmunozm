@@ -2,10 +2,7 @@ package com.jjmunozm.course.springboot.webapp.springboot_web.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,8 +68,12 @@ public class Product {
     @JsonBackReference(value = "product_category")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    @JsonBackReference(value = "product_supplier")
+    private Supplier supplier;
+
     //relacion con n:m con Order
-    //@JsonBackReference(value = "product_order")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
       name = "orders_has_products",

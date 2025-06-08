@@ -45,7 +45,7 @@ public class OrderController {
     }
 
     @PostMapping("/dto")
-    public ResponseEntity<OrderDTO> addOrderDTO(@RequestBody OrderDTO orderDTO){
+    public ResponseEntity<Order> addOrderDTO(@RequestBody OrderDTO orderDTO){
         return new ResponseEntity<>(orderService.newOrderExpirable(orderDTO), HttpStatus.CREATED);
     }
 

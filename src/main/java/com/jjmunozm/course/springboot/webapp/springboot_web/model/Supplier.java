@@ -1,16 +1,16 @@
 package com.jjmunozm.course.springboot.webapp.springboot_web.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "supplier")
@@ -29,5 +29,10 @@ public class Supplier {
     @NotBlank
     @Email(message = "El correo electrónico no es válido")
     private String email;
+
+    //relación 1:n con entidad product
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "product_supplier")
+    private List<Product> products;
 
 }
