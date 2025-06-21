@@ -33,8 +33,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 @NamedQuery(name = "Order.findOrdersByIdProduct",
-query = "select o from Order o JOIN o.products p WHERE p.id = :id_product"
-)
+        query = "select o from Order o JOIN o.products p WHERE p.id = :id_product")
+
+@NamedQuery(name = "User.findOrdersByUserId",
+        query = "select o from Order o where o.user.id = :id_user")
 
 @JsonIdentityInfo(
   generator = ObjectIdGenerators.PropertyGenerator.class,

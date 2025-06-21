@@ -109,4 +109,8 @@ public class OrderService {
         return orderMapper.ordersToOrdersDTO(orders);
     }
 
+    public List<OrderDTO> getOrdersByUser(int id_user){
+        List<Order> orders = orderRepository.findOrdersByUserId(id_user);
+        return orderMapper.ordersToOrdersDTO(orders);
+    }
 }

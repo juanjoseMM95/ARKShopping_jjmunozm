@@ -1,6 +1,7 @@
 package com.jjmunozm.course.springboot.webapp.springboot_web.controllers;
 import java.util.List;
 
+import com.jjmunozm.course.springboot.webapp.springboot_web.facadeService.FOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 
     private final OrderService orderService;
+    private final FOrderService forderService;
 
     @GetMapping
     public ResponseEntity<List<Order>> getOrders() {
@@ -65,6 +67,13 @@ public class OrderController {
     @GetMapping("/idProduct/{id}")
     public ResponseEntity<List<OrderDTO>> getMethodName(@PathVariable int id) {
         List<OrderDTO> orders = orderService.getOrdersByProduct(id);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/user/{enterpriseId}")
+    public ResponseEntity<List<Order>> getOrderByUserId_Contr(@PathVariable String enterpriseId) {
+        List<Order> orders = forderService.getOrderByUserId(enterpriseId);
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
     

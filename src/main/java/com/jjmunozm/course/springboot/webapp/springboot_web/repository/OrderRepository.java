@@ -11,4 +11,5 @@ import com.jjmunozm.course.springboot.webapp.springboot_web.model.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
  List<Order> findOrdersByIdProduct(@Param("id_product") int id);
+ List<Order> findOrdersByUserId(@Param("id_user") int id);
 }

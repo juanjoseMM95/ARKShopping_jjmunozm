@@ -22,6 +22,8 @@ import com.jjmunozm.course.springboot.webapp.springboot_web.model.Product;
         @Mapping(target = "expirationDate", ignore = true)
         OrderDTO orderToOrderDTO(Order order);
 
+        List<Order> ordersDTOToOrders(List<OrderDTO> ordersDTO);
+
         List<OrderDTO> ordersToOrdersDTO(List<Order> orders);
 
         @Named("mapProductsToIds")

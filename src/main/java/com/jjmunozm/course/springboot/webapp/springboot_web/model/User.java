@@ -1,22 +1,15 @@
 package com.jjmunozm.course.springboot.webapp.springboot_web.model;
 
+
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,6 +24,9 @@ import lombok.NoArgsConstructor;
 
 @NamedQuery(name = "User.findUsersOrderByName",
   query = "select u from User u order by u.name")
+
+@NamedQuery(name = "User.findByEnterprise_id",
+query = "select u from User u where u.enterprise_id = :enterprise_id")
 
 @JsonIgnoreProperties("orders")
 public class User {
@@ -66,6 +62,9 @@ public class User {
     private List<Order> orders;
 
   // @Column(columnDefinition="TEXT") para indicar que ese atributo va a almacenar
-  // un texto grande
-  // private String bio;
+
+  @ManyToOne
+  @JoinColumn(name = "profile_id")
+  @JsonBackReference(value = "user_profile")
+  private Profile profile;
 }
